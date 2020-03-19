@@ -1,0 +1,48 @@
+---
+title: "Using_BLBLogistic"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using BLBLogistic}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+This package builds a logistic regression model using R's built-in "glm" function, and retrieves both estimates and intervals of regression coefficients, sigmas, and predictions when applicable. The following is a walkthrough of the package's utilization, using a provided dataset "bank-additional-clean.csv" that is a cleaned version of the dataset found here: https://archive.ics.uci.edu/ml/datasets/bank+marketing.
+__Note: Imported dataset cannot include any NA values.__
+
+First we load the package:
+```{r setup}
+library(devtools)
+install_github("ipalvis/LogisticRegressionBLB")
+
+library(LogisticRegressionBLB)
+```
+We build the model using the package's _blbglm_ function, that takes in *five* parameters: 
+* 1) _formula_: The formula that we wish to regress the data upon.
+* 2) _data_: PATH of the dataset to take in.
+* 3) _m_: The number of partitions ("bags") you wish to make in your future bootstrap data (default to 2)
+* 4) _B_: The number of bootstrap resamplings you wish to make of each partition in _m_ (default to 10)
+* 5) _parallel_: Boolean indicating whether you want to utilize parallelization (for larger datasets) (default to FALSE)
+```{r}
+data <- blbglm(y ~ (.), data = bank)
+```
+We then extract coefficient estimates for each bootstrap in each bag, and generate a mean confidence interval for said estimates.
+* NOTE: confint() takes an additional parameter 
+```{r}
+coef(data)
+confint(data)
+
+```
+
+We can then extract sigma from said estimates, and generate a singular confidence interval for sigma.
+```{r}
+sigma(data)
+```
+
+We generate a probability prediction interval for each estimate 

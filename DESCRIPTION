@@ -1,13 +1,17 @@
-Package: BLBLogistic
-Title: What the Package Does (One Line, Title Case)
+Package: LogisticRegressionBLB
+Title: Bag of Little Bootstrap for Logistic Regression Model
 Version: 0.0.0.9000
-Authors@R: 
-    person(given = "First",
-           family = "Last",
-           role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Authors@R: person("Alvis", "Ip", email = "aip@ucdavis.edu", role = c("aut", "cre"))
+Description: LogisticRegressionBLB uses bag of little bootstraps to estimate regression coefficients, sigma, and prediction intervals on a binary logit model.
 License: What license it uses
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 7.1.0
+Suggests: 
+    testthat (>= 2.1.0),
+    knitr,
+    rmarkdown
+Imports:
+    purrr,
+    magrittr
+VignetteBuilder: knitr
