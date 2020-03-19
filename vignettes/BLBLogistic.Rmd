@@ -19,7 +19,7 @@ __Note: Imported dataset cannot include any NA values.__
 First we load the package:
 ```{r setup}
 library(devtools)
-install_github("ipalvis/LogisticRegressionBLB")
+install_github("ipalvis/BLBLogistic")
 
 library(LogisticRegressionBLB)
 ```

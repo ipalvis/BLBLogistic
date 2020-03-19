@@ -1,4 +1,4 @@
-Package: LogisticRegressionBLB
+Package: BLBLogistic
 Title: Bag of Little Bootstrap for Logistic Regression Model
 Version: 0.0.0.9000
 Authors@R: person("Alvis", "Ip", email = "aip@ucdavis.edu", role = c("aut", "cre"))
