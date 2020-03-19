@@ -15,3 +15,5 @@ Imports:
     purrr,
     magrittr
 VignetteBuilder: knitr
+URL: https://github.com/ipalvis/BLBLogistic
+BugReports: https://github.com/ipalvis/BLBLogistic/issues
