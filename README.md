@@ -11,5 +11,5 @@ use_package("magrittr")
 use_roxygen_md()
 use_namespace()
 use_test("LogisticRegressionBLB")
-use_r("builmodel.R") or whatever R files we will have in here
+use_r("blbglm.R")
 ```
