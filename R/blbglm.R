@@ -72,7 +72,12 @@ blbsigma <- function(fit) {
 #' @export
 #' @method print blbglm
 print.blbglm <- function(x, ...) {
-  cat("blblm model")
+  cat("\nblbglm model\n\nCall:\n ", paste(deparse(x$call)))
+  if(length(coef.blbglm(x))) {
+    cat("\n\nCoefficients\n")
+    print.default(coef.blbglm(x))
+  } else {cat("\nNo Coefficients\n\n")}
+  cat("\nSigma:", sigma.blbglm(x))
 }
 
 
