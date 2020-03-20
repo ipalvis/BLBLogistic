@@ -10,5 +10,6 @@ Open a new R file, and run:
 ```r
 library(devtools)
 devtools::install_github("ipalvis/BLBLogistic")
+library(BLBLogistic)
 ```
 
