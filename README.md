@@ -8,10 +8,14 @@ Bag of Little Bootstrap for Logistic Regression Model. Taking in a clean binary 
 ## To build an R-Package Skeleton
 1) Create a new R package named "LogisticRegressionBLB", then run:
 ```r
-library(dev_tools)
+library(devtools)
 use_readme_md()
 use_package("purrr")
 use_package("magrittr")
+use_package("furrr")
+use_package("tidyverse")
+use_package("future")
+use_package("stats")
 use_roxygen_md()
 use_namespace()
 use_test("LogisticRegressionBLB")
