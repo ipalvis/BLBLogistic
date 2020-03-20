@@ -5,19 +5,10 @@ Bag of Little Bootstrap for Logistic Regression Model. Taking in a clean binary 
 2) Sigmas and its corresponding confidence interval
 3) Prediction intervals and their corresponding prediction intervals
 
-## To build an R-Package Skeleton
-1) Create a new R package named "LogisticRegressionBLB", then run:
+## To load and build Package onto R
+Open a new R file, and run:
 ```r
 library(devtools)
-use_readme_md()
-use_package("purrr")
-use_package("magrittr")
-use_package("furrr")
-use_package("tidyverse")
-use_package("future")
-use_package("stats")
-use_roxygen_md()
-use_namespace()
-use_test("LogisticRegressionBLB")
-use_r("blbglm.R")
+devtools::install_github("ipalvis/BLBLogistic")
 ```
+
