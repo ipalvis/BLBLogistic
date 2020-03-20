@@ -5,6 +5,8 @@ Bag of Little Bootstrap for Binary Logistic Regression Model. Taking in a clean 
 2) Sigma and its corresponding confidence interval
 3) Prediction values and their corresponding prediction intervals
 
+This package was created as a final project for STA 141C, Winter Quarter 2020, UC Davis.
+
 ## To load and build Package onto R
 Open a new R file, and run:
 ```r
