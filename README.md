@@ -12,12 +12,9 @@ library(devtools)
 devtools::install_github("ipalvis/BLBLogistic")
 library(BLBLogistic)
 ```
-##Authors:
 
+## Authors:
 Alvis Ip
-
 Koral Buch
-
 Nikhila Thota
-
 Songwen Su
