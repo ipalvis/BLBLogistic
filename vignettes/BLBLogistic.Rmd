@@ -18,10 +18,7 @@ __Note: Imported dataset cannot include any NA values.__
 
 First we load the package:
 ```{r setup}
-library(devtools)
-install_github("ipalvis/BLBLogistic")
-
-library(LogisticRegressionBLB)
+library(BLBLogistic)
 ```
 We build the model using the package's _blbglm_ function, that takes in *five* parameters: 
 * 1) _formula_: The formula that we wish to regress the data upon.
@@ -30,14 +27,15 @@ We build the model using the package's _blbglm_ function, that takes in *five* p
 * 4) _B_: The number of bootstrap resamplings you wish to make of each partition in _m_ (default to 10)
 * 5) _parallel_: Boolean indicating whether you want to utilize parallelization (for larger datasets) (default to FALSE)
 ```{r}
+bank = read.csv("C:/Users/Alvis/Desktop/bank-additional-clean.csv")
 data <- blbglm(y ~ (.), data = bank)
 ```
+
 We then extract coefficient estimates for each bootstrap in each bag, and generate a mean confidence interval for said estimates.
-* NOTE: confint() takes an additional parameter 
+* NOTE: confint() takes an additional parameter _parm_ to specify which specific estimate CI's you wish to retrieve.
 ```{r}
 coef(data)
 confint(data)
-
 ```
 
 We can then extract sigma from said estimates, and generate a singular confidence interval for sigma.
@@ -45,4 +43,12 @@ We can then extract sigma from said estimates, and generate a singular confidenc
 sigma(data)
 ```
 
-We generate a probability prediction interval for each estimate 
+We generate a probability prediction/prediction interval (if applicable) for each estimate, taking in up to *four* parameters:
+* 1) _object_: PATH of the dataset to read.
+* 2) _newdata_: An optional data frame of equal length of _object_, to replace fitted values for predicted estimates.
+* 3) _confidence_: A boolean operator indicating output of prediction interval (default to FALSE)
+* 4) _level_: The quantile of which you wish you prediction to be generated upon (default to 0.95 or 95%)
+```{r}
+predict(data)
+```
+

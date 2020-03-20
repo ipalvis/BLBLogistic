@@ -1,5 +1,6 @@
 #' @import tidyverse
 #' @import purrr
+#' @import furrr
 #' @import stats
 #' @importFrom magrittr %>%
 #' @details
@@ -171,5 +172,3 @@ predict.blbglm <- function(object, newdata, confidence = FALSE, level = 0.95, ..
     # YOUR CODE to compute the predictions
   }
 }
-
-
