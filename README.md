@@ -19,3 +19,5 @@ Alvis Ip
 Koral Buch  
 Nikhila Thota  
 Songwen Su
+
+_The vignette offers a detailed example of how to use the package._
