@@ -2,10 +2,10 @@
 % Please edit documentation in R/blbglm.R
 \name{glm1}
 \alias{glm1}
-\title{estimate the regression estimates based on given number of repetitions}
+\title{Based on freqs - the number of repetitions, this generates the glm model for each and determines the coefficients and sigmas of each BLB.}
 \usage{
 glm1(formula, data, freqs)
 }
 \description{
-estimate the regression estimates based on given number of repetitions
+Based on freqs - the number of repetitions, this generates the glm model for each and determines the coefficients and sigmas of each BLB.
 }

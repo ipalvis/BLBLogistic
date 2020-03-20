@@ -2,10 +2,10 @@
 % Please edit documentation in R/blbglm.R
 \name{glm_each_boot}
 \alias{glm_each_boot}
-\title{compute the regression estimates for a blb dataset}
+\title{Under BLB, this computes regression estimates.}
 \usage{
 glm_each_boot(formula, data, n)
 }
 \description{
-compute the regression estimates for a blb dataset
+Under BLB, this computes regression estimates.
 }

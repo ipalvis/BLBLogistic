@@ -2,10 +2,10 @@
 % Please edit documentation in R/blbglm.R
 \name{blbsigma}
 \alias{blbsigma}
-\title{compute sigma from fit}
+\title{Using fit, we calculate the sigmas.}
 \usage{
 blbsigma(fit)
 }
 \description{
-compute sigma from fit
+Using fit, we calculate the sigmas.
 }

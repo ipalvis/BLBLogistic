@@ -2,10 +2,10 @@
 % Please edit documentation in R/blbglm.R
 \name{glm_each_subsample}
 \alias{glm_each_subsample}
-\title{compute the estimates}
+\title{This computes estimates for the partitioned subsamples from split_data.}
 \usage{
 glm_each_subsample(formula, data, n, B)
 }
 \description{
-compute the estimates
+This computes estimates for the partitioned subsamples from split_data.
 }

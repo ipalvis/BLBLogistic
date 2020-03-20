@@ -2,10 +2,10 @@
 % Please edit documentation in R/blbglm.R
 \name{split_data}
 \alias{split_data}
-\title{split data into m parts of approximated equal sizes}
+\title{This splits our data into a requested m sizes.}
 \usage{
 split_data(data, m)
 }
 \description{
-split data into m parts of approximated equal sizes
+This splits our data into a requested m sizes.
 }

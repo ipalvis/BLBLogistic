@@ -3,7 +3,7 @@
 #' @import stats
 #' @importFrom magrittr %>%
 #' @details
-# Logistic Regression with Little Bag of Bootstraps
+# Logistic Regression with Bag of Little Bootstraps
 "_PACKAGE"
 
 #' @export
@@ -21,20 +21,20 @@ blbglm <- function(formula, data, m = 2, B = 10, parallel = FALSE) {
 }
 
 
-#' split data into m parts of approximated equal sizes
+#' This splits our data into a requested m sizes.
 split_data <- function(data, m) {
   indx <- sample.int(m, nrow(data), replace = TRUE)
   data %>% split(indx)
 }
 
 
-#' compute the estimates
+#' This computes estimates for the partitioned subsamples from split_data.
 glm_each_subsample <- function(formula, data, n, B) {
   replicate(B, glm_each_boot(formula, data, n), simplify = FALSE)
 }
 
 
-#' compute the regression estimates for a blb dataset
+#' Under BLB, this computes regression estimates.
 glm_each_boot <- function(formula, data, n) {
   freqs <- rmultinom(1, n, rep(1, nrow(data)))
   glm1(formula, data, freqs)
@@ -42,23 +42,22 @@ glm_each_boot <- function(formula, data, n) {
 }
 
 
-#' estimate the regression estimates based on given number of repetitions
+#' Based on freqs - the number of repetitions, this generates the glm model for each and determines the coefficients and sigmas of each BLB.
 glm1 <- function(formula, data, freqs) {
-  # drop the original closure of formula,
-  # otherwise the formula will pick wrong variables from a parent scope.
+  # drop the original closure of formula for environment purposes
   environment(formula) <- environment()
   fit <- glm(formula, data, weights = freqs, family = binomial("logit"))
   list(coef = blbcoef(fit), sigma = blbsigma(fit))
 }
 
 
-#' compute the coefficients from fit
+#' Using fit, we extract the coefficients.
 blbcoef <- function(fit) {
   coef <- fit$coefficients
 }
 
 
-#' compute sigma from fit
+#' Using fit, we calculate the sigmas.
 blbsigma <- function(fit) {
   p <- fit$rank
   y <- model.extract(fit$model, "response")

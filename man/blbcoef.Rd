@@ -2,10 +2,10 @@
 % Please edit documentation in R/blbglm.R
 \name{blbcoef}
 \alias{blbcoef}
-\title{compute the coefficients from fit}
+\title{Using fit, we extract the coefficients.}
 \usage{
 blbcoef(fit)
 }
 \description{
-compute the coefficients from fit
+Using fit, we extract the coefficients.
 }
