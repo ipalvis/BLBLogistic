@@ -13,3 +13,7 @@ devtools::install_github("ipalvis/BLBLogistic")
 library(BLBLogistic)
 ```
 Authors:
+Alvis Ip
+Koral Buch
+Nikhila Thota
+Songwen Su
