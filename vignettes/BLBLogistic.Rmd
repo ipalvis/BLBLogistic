@@ -1,5 +1,5 @@
 ---
-title: "Using_BLBLogistic"
+title: "Using BLBLogistic"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Using BLBLogistic}
@@ -13,42 +13,74 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
-This package builds a logistic regression model using R's built-in "glm" function, and retrieves both estimates and intervals of regression coefficients, sigmas, and predictions when applicable. The following is a walkthrough of the package's utilization, using a provided dataset "bank-additional-clean.csv" that is a cleaned version of the dataset found here: https://archive.ics.uci.edu/ml/datasets/bank+marketing.
+This package builds a logistic regression model using R's built-in "glm" function, utilizes BLB to subsample and resample the data, and retrieves both estimates and intervals of regression coefficients, sigmas, and predictions when applicable. The following is a walkthrough of the package's utilization, using 1) a provided dataset "bank-additional-clean.csv" that is a cleaned version of the dataset found here: https://archive.ics.uci.edu/ml/datasets/bank+marketing and 2) a 1992 questionnaire regarding the telecommution of City of San Diego Employees.
+
 __Note: Imported dataset cannot include any NA values.__
 
 First we load the package:
 ```{r setup}
 library(BLBLogistic)
 ```
-We build the model using the package's _blbglm_ function, that takes in *five* parameters: 
-* 1) _formula_: The formula that we wish to regress the data upon.
-* 2) _data_: PATH of the dataset to take in.
-* 3) _m_: The number of partitions ("bags") you wish to make in your future bootstrap data (default to 2)
-* 4) _B_: The number of bootstrap resamplings you wish to make of each partition in _m_ (default to 10)
-* 5) _parallel_: Boolean indicating whether you want to utilize parallelization (for larger datasets) (default to FALSE)
-```{r}
-bank = read.csv("C:/Users/Alvis/Desktop/bank-additional-clean.csv")
-data <- blbglm(y ~ (.), data = bank)
+We read the clean .csv file and assign it to our data variable of interest. We build the model using the package's _blbglm_ function, that takes in *five* parameters: 
+
+1. _formula_: The formula that we wish to regress the data upon.
+
+2. _data_: PATH of the dataset to take in.
+
+3. _m_: The number of partitions ("bags") you wish to make in your future bootstrap data (default to 2)
+
+4. _B_: The number of bootstrap resamplings you wish to make of each partition in _m_ (default to 10)
+
+5. _parallel_: Boolean indicating whether you want to utilize parallelization (for larger datasets) (default to FALSE)
+```{r, warning = FALSE}
+bank <- read.csv("bank_data_clean.csv")
+bankdata <- blbglm(y ~ age + job + marital + housing + contact + month + day_of_week + campaign + pdays + previous + poutcome + cons.price.idx + cons.conf.idx + euribor3m + nr.employed + y, data = bank, m = 3, B = 10, parallel = TRUE)
+
+telcom = read.csv("tele_data_clean.csv")
+teledata <- blbglm(C3H17M ~ OVERTIME + EFACT9 + EFACT6 + MANCONST + JOBCONST
+                 + TECHCONS + CSO9FT2, data = telcom, m = 3, B = 10)
 ```
 
 We then extract coefficient estimates for each bootstrap in each bag, and generate a mean confidence interval for said estimates.
-* NOTE: confint() takes an additional parameter _parm_ to specify which specific estimate CI's you wish to retrieve.
+
+* NOTE: confint() takes two additional parameters:
+
+1) _parm_ to specify which specific estimate CI's you wish to retrieve
+
+2) _level_ to specify quantile lengths for confidence intervals
 ```{r}
-coef(data)
-confint(data)
+coef(bankdata)
+confint(bankdata, parm = c("age", "marital", "nr.employed"), level = 0.99)
+
+coef(teledata)
+confint(teledata)
 ```
 
-We can then extract sigma from said estimates, and generate a singular confidence interval for sigma.
+We can then extract sigma from said estimates, and generate a singular confidence interval for sigma. (sigma takes the same parameters as confit from above)
 ```{r}
-sigma(data)
+sigma(bankdata, confidence = TRUE, level = 0.99)
+
+sigma(teledata, confidence = TRUE)
 ```
 
-We generate a probability prediction/prediction interval (if applicable) for each estimate, taking in up to *four* parameters:
-* 1) _object_: PATH of the dataset to read.
-* 2) _newdata_: An optional data frame of equal length of _object_, to replace fitted values for predicted estimates.
-* 3) _confidence_: A boolean operator indicating output of prediction interval (default to FALSE)
-* 4) _level_: The quantile of which you wish you prediction to be generated upon (default to 0.95 or 95%)
-```{r}
-predict(data)
-```
+We generate a probability prediction/prediction interval for each estimate, taking in up to *four* parameters:
 
+1. _object_: PATH of the dataset to read.
+
+2. _newdata_: A data frame of equal length of _object_, to replace fitted values for wanted predicted estimates.
+
+3. _confidence_: A boolean toggle indicating output of prediction interval (default to FALSE)
+
+4. _level_: The quantile of which you wish you prediction to be generated upon (default to 0.95 or 95%)
+```{r}
+x_bank <- data.frame(age = 40, job = 2, marital = 3, housing = 1, contact = 1, month = 7, day_of_week = 4, campaign = 2, pdays = 999, previous = 0, poutcome = 2, cons.price.idx = 93.918, cons.conf.idx = -41.8, euribor3m = 4.864, nr.employed = 5228.1, y = 0)
+predict(bankdata, x_bank, confidence = TRUE, level = 0.99)
+
+x_tele <- data.frame(OVERTIME = c(4, 5), EFACT9 = c(0.5, 0.6), EFACT6 = c(1,0), MANCONST = c(1, 1), JOBCONST = c(1, 0), TECHCONS = c(0, 1), CSO9FT2 = c(0.5, 1))
+predict(teledata, x_tele, confidence = TRUE)
+```
+The updated print function takes in the blbglm data, and displays the blbglm model/sampling, coefficient estimates of the BLB samples, the sigma, and returns the requested subsample _m_ and bootstrap size _B_.
+```{r}
+print(bankdata)
+print(teledata)
+```

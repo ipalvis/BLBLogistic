@@ -6,7 +6,10 @@
 \alias{BLBLogistic-package}
 \title{BLBLogistic: Bag of Little Bootstrap for Logistic Regression Model}
 \description{
-LogisticRegressionBLB uses bag of little bootstraps to estimate regression coefficients, sigma, and prediction intervals on a binary logit model.
+BLBLogistic uses bag of little bootstraps to estimate regression coefficients, sigma, and prediction intervals on a binary logit model.
+}
+\details{
+Logistic Regression with Bag of Little Bootstraps
 }
 \seealso{
 Useful links:
@@ -18,5 +21,12 @@ Useful links:
 }
 \author{
 \strong{Maintainer}: Alvis Ip \email{aip@ucdavis.edu}
+
+Authors:
+\itemize{
+  \item Nikhila Thota \email{nthota@ucdavis.edu}
+  \item Koralle Buch \email{kbuch@ucdavis.edu}
+  \item Songwen Su \email{swsu@ucdavis.edu}
+}
 
 }

@@ -1,8 +1,9 @@
 Package: BLBLogistic
 Title: Bag of Little Bootstrap for Logistic Regression Model
-Version: 0.0.0.9000
-Authors@R: person("Alvis", "Ip", email = "aip@ucdavis.edu", role = c("aut", "cre"))
-Description: LogisticRegressionBLB uses bag of little bootstraps to estimate regression coefficients, sigma, and prediction intervals on a binary logit model.
+Version: 0.1.0
+Authors@R: c(person("Alvis", "Ip", email = "aip@ucdavis.edu", role = c("aut", "cre")), person("Nikhila", "Thota", email = "nthota@ucdavis.edu", role = c("aut")), 
+             person("Koralle", "Buch", email = "kbuch@ucdavis.edu", role = c("aut")), person("Songwen", "Su", email = "swsu@ucdavis.edu", role = c("aut")))
+Description: BLBLogistic uses bag of little bootstraps to estimate regression coefficients, sigma, and prediction intervals on a binary logit model.
 License: What license it uses
 Encoding: UTF-8
 LazyData: true
@@ -13,7 +14,10 @@ Suggests:
     rmarkdown
 Imports:
     purrr,
-    magrittr
+    magrittr,
+    furrr,
+    tidyverse,
+    future
 VignetteBuilder: knitr
 URL: https://github.com/ipalvis/BLBLogistic
 BugReports: https://github.com/ipalvis/BLBLogistic/issues
